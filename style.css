@@ -1,0 +1,16 @@
+.headerTextSize{
+    font-size: 14px !important;
+}
+
+.titleTextSize{
+    font-size: 16px !important;
+}
+
+.textSize{
+    font-size: 12px !important;
+}
+
+.flatpickr-calendar.open {
+    background-color: white;
+    border: 3px solid rgb(255, 255, 255);
+  }

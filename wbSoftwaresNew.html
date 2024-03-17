@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Receipt</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body class="m-4">
+    <section class="max-w-5xl mx-auto">
+        <div class="mb-4 flex justify-between items-center">
+            <img class="w-4/12" src="assets/logo/wbsoft.png" alt="">
+            <div class="flex gap-4 items-center">
+                <div class="text-sm font-bold">
+                    <p>+880 1774444000</p>
+                    <p>+880 9696863000</p>
+                </div>
+                <i class="fa-solid fa-phone-volume bg-black text-lg text-white px-2 py-1"></i>
+            </div>
+        </div>
+        <!--============================= Company & Customer Info start ====================================-->
+        <table class="border-collapse border-2-2 w-full mt-1">
+            <thead>
+                <tr class="bg-blue-100">
+                    <th class="border-2 py-[8px] border-slate-300 font-bold text-center headerTextSize w-7/12">
+                        Company
+                        Info</th>
+                    <th class="border-2 py-[8px] border-slate-300 font-bold text-center headerTextSize w-5/12">
+                        <button id="modal" class="coursor-pointer" onclick="customer_modal.showModal()">
+                            Customer Info
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border-2 px-2 py-1 border-slate-300 textSize font-semibold text-center w-7/12">
+                        <div class="flex justify-between">
+                            <ul class="text-left space-y-1 textSize w-5/12">
+                                <li class="font-bold">Company</li>
+                                <li class="font-bold">Email</li>
+                                <li class="font-bold">Phone</li>
+                                <li class="font-bold">Address</li>
+                            </ul>
+                            <ul class="text-left space-y-1 textSize w-7/12">
+                                <li class="font-semibold uppercase">wb softwares</li>
+                                <li class="font-semibold">wbsoftwaresteam@gmail.com</li>
+                                <li class="font-semibold">+8801602024545</li>
+                                <li class="font-semibold">House# 433, Flat#3B, Road#30, Mohakhali <br> DOSH, Dhaka
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="border-2 px-2 py-1 border-slate-300 font-semibold text-center w-5/12">
+                        <div class="flex justify-between -mt-5">
+                            <ul class="text-left space-y-1 textSize w-5/12">
+                                <li class="font-bold">Customer</li>
+                                <li class="font-bold">CustomerID#</li>
+                                <li class="font-bold">Phone</li>
+                                <li class="font-bold">Address</li>
+                            </ul>
+                            <ul class="text-left space-y-1 textSize w-7/12">
+                                <li class="font-semibold uppercase" id="customerName"></li>
+                                <li class="font-semibold" id="customerID"></li>
+                                <li class="font-semibold" id="customerPhone"></li>
+                                <li class="font-semibold" id="customerAddress"></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-2 px-2 py-1 border-slate-300 text-xs font-semibold h-5 text-center"
+                        onclick="invoice_modal.showModal()">
+                        <div class="flex justify-between">
+                            <ul class="text-left space-y-1 textSize w-5/12">
+                                <li class="font-bold">Invoice Date-</li>
+                                <li class="font-bold">InvoiceID-</li>
+                                <li class="font-bold">Salesman-</li>
+                            </ul>
+                            <ul class="text-left space-y-1 w-7/12">
+                                <li class="font-semibold text-xs uppercase" id="invoiceDate"></li>
+                                <li class="font-semibold text-xs" id="invoiceID"></li>
+                                <li class="font-semibold text-xs" id="salesmanName"></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="border-2 px-2 py-1 border-slate-300 text-xs font-semibold h-5 text-center">
+                        <div class="flex justify-between">
+                            <ul class="text-left space-y-1 textSize w-5/12">
+                                <li class="font-bold">Payment Date-</li>
+                                <li class="font-bold">Receipt ID-</li>
+                                <li class="font-bold">Payment Method-</li>
+                            </ul>
+                            <ul class="text-left space-y-1 w-7/12">
+                                <li class="font-semibold text-xs uppercase" id="paymentDate"></li>
+                                <li class="font-semibold text-xs" id="receiptID"></li>
+                                <li class="font-semibold text-xs" id="paymentMethod"></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--============================= Company & Customer Info end ====================================-->
+
+
+        <!--============================= Product Information Start ====================================-->
+        <table class="border-collapse border-2-2 w-full mt-1">
+            <h2 class="text-center font-bold text-orange-500 mt-1 titleTextSize uppercase">Product Information</h2>
+            <thead>
+                <tr class="bg-blue-100">
+                    <th class="border-2 py-[8px] border-slate-300 font-bold text headerTextSize textSize w-[10%]">Serial
+                    </th>
+                    <th class="border-2 border-slate-300 font-bold text-cente headerTextSize w-[10%]">Proposal
+                    </th>
+                    <th class="border-2 border-slate-300 font-bold text-cente headerTextSize w-[60%]">
+                        <button id="modal" class="coursor-pointer w-full min-h-5" onclick="product_modal_1.showModal()">
+                            Descriptions
+                        </button>
+                    </th>
+                    <th class="border-2 border-slate-300 font-bold text-cente headerTextSize w-{20%}">Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center" id="product_sl_1">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_proposal_1">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center">
+                        <div id="modal" class="w-full min-h-6">
+                            <span id="product_des_1"></span>
+                        </div>
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_price_1">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center" id="product_sl_2">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_proposal_2">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center">
+                        <div id="modal" class="w-full min-h-6">
+                            <span id="product_des_2"></span>
+                        </div>
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_price_2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center" id="product_sl_3">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_proposal_3">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center">
+                        <div id="modal" class="w-full min-h-6">
+                            <span id="product_des_3"></span>
+                        </div>
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold text-center"
+                        id="product_price_3">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] border-r-white border-slate-300 textSize font-semibold text-center">
+                    </td>
+                    <td
+                        class="border-2 p-[2px] border-r-white border-slate-300 border-slate-300 textSize font-semibold text-center">
+                    </td>
+                    <td class="border-2 px-[8px] py-1 border-slate-300 textSize font-bold text-right">Total</td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-bold text-center bg-blue-100"
+                        id="productTotal"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--============================= Product Information end ====================================-->
+
+
+        <!--=================================== Payment Info Start =======================================-->
+        <table class="border-collapse border-2-2 w-full mt-1">
+            <h2 class="text-center font-bold text-orange-500 mt-1 titleTextSize uppercase">Payment Information</h2>
+            <thead>
+                <tr class="bg-blue-100">
+                    <th class="headerTextSize border-2 p-[8px] border-slate-300 font-bold w-0.5/12">Sl</th>
+                    <th class="headerTextSize border-2 border-slate-300 font-bold w-1.5/12">Date</th>
+                    <th class="headerTextSize border-2 border-slate-300 font-bold text-center w-6/12">Details
+                    </th>
+                    <th class="headerTextSize border-2 border-slate-300 font-bold text-center w-2/12">Receive by
+                    </th>
+                    <th class="headerTextSize border-2 border-slate-300 font-bold w-2/12">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center">1</td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center" id="pay_date">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize text-left font-semibold">
+                        <button id="modal" class="coursor-pointer w-full min-h-6"
+                            onclick="payment_info_modal.showModal()">
+                            <span class="font-lg" id="pay_des"></span>
+                        </button>
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center " id="pay_name">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-bold h-5 text-center">
+                        <span id="pay_price"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--=================================== Payment Info end =======================================-->
+
+
+        <!--=================================== Bank Info Start =======================================-->
+        <table class="border-collapse border-2-2 w-full mt-3">
+            <thead>
+                <tr class="relative">
+                    <th
+                        class="headerTextSize border-2 py-[8px] px-2 border-slate-300 border-r-blue-100 font-bold text-left bg-blue-100">
+
+                        <button id="modal" class="coursor-pointer w-full text-left"
+                            onclick="bank_info_modal.showModal()">
+                            <span class="absolute top-2 right-[67%]">Bank Information</span>
+                        </button>
+                    </th>
+                    <th
+                        class="headerTextSize border-2 py-[8px] border-slate-300 z-10 font-bold text-center bg-blue-100">
+                    </th>
+                    <th
+                        class="headerTextSize border-2 py-[8px] px-2 border-slate-300 border-r-blue-100 text-left font-bold bg-blue-100 ">
+                        <button id="modal" class="coursor-pointer w-full text-left"
+                            onclick="transaction_info_modal.showModal()">
+                            <span class="absolute top-2 left-[67%]">Transaction Information</span>
+                        </button>
+                    </th>
+                    <th class="headerTextSize border-2 py-[8px] border-slate-300 font-bold text-center bg-blue-100">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Bank</td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%] uppercase"
+                        id="bankName"></td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Transaction
+                        ID</td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"
+                        id="transactionID"></td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Branch</td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"
+                        id="branchName"></td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Transaction
+                        From</td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"
+                        id="transactionFrom"></td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Account No
+                    </td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"
+                        id="accountNo"></td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Transaction
+                        Type</td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"
+                        id="transactionType"></td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-bold text-left w-[20%]">Account Name
+                    </td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%] uppercase"
+                        id="accountName"></td>
+                    <td
+                        class="border-2 p-[2px] px-2 border-slate-300 border-r-white textSize font-bold text-left w-[20%]">
+                    </td>
+                    <td class="border-2 p-[2px] px-2 border-slate-300 textSize font-semibold text-left w-[30%]"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--=================================== Bank Info end =======================================-->
+
+
+        <!--================================== Closing Calculation start ======================================-->
+        <table class="border-collapse border-2 w-full mt-1">
+            <h2 class="text-center font-bold text-orange-500 my-1 titleTextSize uppercase">Closing Calculation</h2>
+            <thead>
+                <tr class="bg-blue-100">
+                    <th class="headerTextSize border-2 py-[8px] border-slate-300 font-bold  text-center ">Total
+                        amount</th>
+                    <th class="headerTextSize border-2 py-[8px] border-slate-300 font-bold  text-center ">Paid
+                        amount</th>
+                    <th class="headerTextSize border-2 py-[8px] border-slate-300 font-bold  text-center ">Due
+                        amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center">
+                        <div class="min-h-6" id="closingTotal"></div>
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center"
+                        id="closingPaid">
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 textSize font-semibold h-5 text-center "
+                        id="closingDue">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--=================================== Closing Calculation end =======================================-->
+
+
+        <!--=================================== Signature part start =======================================-->
+        <table class="border-collapse border-2-2 w-full mt-2">
+            <tbody>
+                <tr>
+                    <td class="headerTextSize border-2 p-[2px] border-slate-300 text-xs font-semibold text-center h-28">
+                    </td>
+                    <td class="headerTextSize border-2 p-[2px] border-slate-300 text-xs font-semibold text-center h-28">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border-2 p-[2px] border-slate-300 text-xs font-bold h-4 text-center uppercase">signature
+                    </td>
+                    <td class="border-2 p-[2px] border-slate-300 text-xs font-bold h-4 text-center uppercase">signature
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--=================================== Signature part end =======================================-->
+
+
+        <!-- All Modal -->
+        <div>
+            <!-- customer info modal -->
+            <div class="flex justify-between mt-2">
+                <dialog id="customer_modal" class="modal">
+                    <div class="modal-box px-0 rounded-sm max-w-5xl relative">
+                        <div>
+                            <h1 class="mx-5 text-2xl font-semibold text-center text-blue-600 uppercase">Customer Info
+                            </h1>
+                            <div class="h-[1px] w-full bg-blue-200 mt-5"></div>
+
+                            <form class="mx-5 space-y-6 my-5" id="myForm" method="dialog">
+                                <div class="flex gap-4">
+                                    <div class="w-full">
+                                        <h3>Customer Name <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="text" name="clientName"
+                                            class="border-[1px] rounded-sm p-[2px] w-full" required>
+                                    </div>
+                                    <div class="w-full">
+                                        <h3>Customer ID <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="text" name="customerID"
+                                            class="border-[1px] rounded-sm p-[2px] w-full" required>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="w-full">
+                                        <h3>Phone <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="number" name="phone" class="border-[1px] rounded-sm p-[2px] w-full"
+                                            required>
+                                    </div>
+                                    <div class="w-full">
+                                        <h3>Address <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="text" name="address" class="border-[1px] rounded-sm p-[2px] w-full"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="w-full">
+                                        <h3>Date <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="text" name="date" id="datepicker2" required
+                                            class="border border-gray-200 p-[2px] rounded-sm focus:outline-none focus:border-blue-500 w-full z-10">
+                                    </div>
+                                    <div class="w-full">
+                                        <h3>Receipt ID <span class="text-red-600 text-lg">*</span></h3>
+                                        <input type="number" name="id" class="border-[1px] rounded-sm p-[2px] w-full"
+                                            required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>Payment Method <span class="text-red-600 text-lg">*</span></h3>
+                                    <input type="text" name="method" class="border-[1px] rounded-sm p-[2px] w-full"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                    Submit
+                                </button>
+
+                            </form>
+                            <div class="modal-action mr-5">
+                                <form method="dialog">
+                                    <button id="closeBtn" class="btn bg-slate-200 rounded-md">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                </dialog>
+            </div>
+            <!-- Invoice Info Modal -->
+            <div class="flex justify-between mt-2">
+                <dialog id="invoice_modal" class="modal">
+                    <div class="modal-box px-0 rounded-sm">
+                        <div>
+                            <h1 class="mx-5 text-2xl font-semibold text-center text-blue-600 uppercase">Invoice Info
+                            </h1>
+                            <div class="h-[1px] w-full bg-blue-200 mt-5"></div>
+
+                            <form class="mx-5 space-y-6 my-5" id="invoiceForm" method="dialog">
+                                <div>
+                                    <h3>Salesman Name <span class="text-red-600 text-lg">*</span></h3>
+                                    <input type="text" name="salesmanName"
+                                        class="border-[1px] rounded-sm p-[2px] w-full" required>
+                                </div>
+                                <div>
+                                    <h3>Invoice ID <span class="text-red-600 text-lg">*</span></h3>
+                                    <input type="text" name="customerInvoiceID"
+                                        class="border-[1px] rounded-sm p-[2px] w-full" required>
+                                </div>
+                                <div>
+                                    <h3>Date <span class="text-red-600 text-lg">*</span></h3>
+                                    <input type="text" name="invoiceDate" id="datepicker1" required
+                                        class="border border-gray-200 p-[2px] rounded-sm focus:outline-none focus:border-blue-500 w-full">
+                                </div>
+                                <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                    Submit
+                                </button>
+
+                            </form>
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <button id="invoiceCloseBtn" class="btn bg-slate-200 rounded-md mr-5">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                </dialog>
+            </div>
+            <!-- Product Modal -->
+            <dialog id="product_modal_1" class="modal">
+                <div class="modal-box px-0 rounded-sm">
+                    <div>
+                        <form class="mx-5 space-y-6 my-5" id="product_form_1" method="dialog">
+                            <div>
+                                <h3>Proposal <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="number" name="proposal_input_1"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <div>
+                                <h3>Descriptions <span class="text-red-600 text-lg">*</span></h3>
+                                <textarea name="des_input_1" cols="30" rows="4"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required></textarea>
+                            </div>
+                            <div>
+                                <h3>Price <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="number" name="total_input_1" class="border-[1px] rounded-sm p-[2px] w-full"
+                                    required>
+                            </div>
+                            <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                Submit
+                            </button>
+
+                        </form>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button id="productCloseBtn1" class="btn bg-slate-200 rounded-md mr-5">Close</button>
+                            </form>
+                        </div>
+                    </div>
+            </dialog>
+            <!-- payment modal -->
+            <dialog id="payment_info_modal" class="modal">
+                <div class="modal-box px-0 rounded-sm">
+                    <div>
+                        <form class="mx-5 space-y-6 my-5" id="payment_form" method="dialog">
+                            <div>
+                                <h3>Receipt by <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="payment_receipt" class="border-[1px] rounded-sm p-[2px] w-full"
+                                    required>
+                            </div>
+                            <div>
+                                <h3>Amount <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="number" name="payment_price" class="border-[1px] rounded-sm p-[2px] w-full"
+                                    required>
+                            </div>
+                            <div>
+                                <h3>Date <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="payment_date" id="datepicker" required
+                                    class="border border-gray-200 p-[2px] rounded-sm focus:outline-none focus:border-blue-500 w-full z-10">
+                            </div>
+                            <div>
+                                <h3>Details <span class="text-red-600 text-lg">*</span></h3>
+                                <textarea name="payment_des" cols="30" rows="4"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required></textarea>
+                            </div>
+                            <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                Submit
+                            </button>
+
+                        </form>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button id="payCloseBtn" class="btn bg-slate-200 rounded-md mr-5">Close</button>
+                            </form>
+                        </div>
+                    </div>
+            </dialog>
+            <!-- Transaction modal -->
+            <dialog id="transaction_info_modal" class="modal">
+                <div class="modal-box px-0 rounded-sm">
+                    <div>
+                        <form class="mx-5 space-y-6 my-5" id="transaction_form" method="dialog">
+                            <div>
+                                <h3>Transaction ID <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="number" name="transactionIDInput"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <div>
+                                <h3>Transaction From <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="transactionFromInput"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <div>
+                                <h3>Transaction Type <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="transactionTypeInput"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                Submit
+                            </button>
+                        </form>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button id="transactionCloseBtn" class="btn bg-slate-200 rounded-md mr-5">Close</button>
+                            </form>
+                        </div>
+                    </div>
+            </dialog>
+            <!-- Bank Modal -->
+            <dialog id="bank_info_modal" class="modal">
+                <div class="modal-box px-0 rounded-sm">
+                    <div>
+                        <form class="mx-5 space-y-6 my-5" id="bank_form" method="dialog">
+                            <div>
+                                <h3>Bank Name <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="bankNameInput" class="border-[1px] rounded-sm p-[2px] w-full"
+                                    required>
+                            </div>
+                            <div>
+                                <h3>Branch <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="bankBranchInput" class="border-[1px] rounded-sm p-[2px] w-full"
+                                    required>
+                            </div>
+                            <div>
+                                <h3>Account Number <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="number" name="bankAccNumberInput"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <div>
+                                <h3>Account Name <span class="text-red-600 text-lg">*</span></h3>
+                                <input type="text" name="bankAccNameInput"
+                                    class="border-[1px] rounded-sm p-[2px] w-full" required>
+                            </div>
+                            <button type="submit" class="btn bg-blue-500 text-white rounded-md absolute right-24">
+                                Submit
+                            </button>
+                        </form>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button id="bankCloseBtn" class="btn bg-slate-200 rounded-md mr-5">Close</button>
+                            </form>
+                        </div>
+                    </div>
+            </dialog>
+        </div>
+    </section>
+
+
+    <script src="wbSoftwaresNew.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="datepicker.js"></script>
+    </script>
+</body>
+
+</html>
